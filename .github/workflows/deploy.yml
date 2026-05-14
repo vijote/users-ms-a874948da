@@ -14,6 +14,7 @@ env:
   ECS_CLUSTER: ${{ vars.ECS_CLUSTER }}
   AWS_GITHUB_ECS_ROLE_NAME: ${{ vars.AWS_GITHUB_ECS_ROLE_NAME }}
   AWS_TASK_FAMILY_NAME: ${{ vars.AWS_TASK_FAMILY_NAME }}
+  AWS_TASK_CONTAINER_NAME: ${{ vars.AWS_TASK_CONTAINER_NAME }}
 
 jobs:
   deploy:
@@ -67,7 +68,7 @@ jobs:
       uses: aws-actions/amazon-ecs-render-task-definition@v1
       with:
         task-definition: task-definition.json
-        container-name: recipes-container  # Debe coincidir con el nombre en el JSON
+        container-name: ${{ env.AWS_TASK_CONTAINER_NAME }}  # Debe coincidir con el nombre en el JSON
         image: ${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_REPOSITORY }}:${{ env.IMAGE_TAG }}
 
     # 3. Desplegar la nueva definición al servicio de ECS
