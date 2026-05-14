@@ -12,6 +12,7 @@ env:
   ECR_REPOSITORY: ${{ vars.ECR_REPOSITORY }}
   ECS_SERVICE: ${{ vars.ECS_SERVICE }}
   ECS_CLUSTER: ${{ vars.ECS_CLUSTER }}
+  AWS_GITHUB_ECS_ROLE_NAME: ${{ vars.AWS_GITHUB_ECS_ROLE_NAME }}
 
 jobs:
   deploy:
@@ -31,7 +32,7 @@ jobs:
       uses: aws-actions/configure-aws-credentials@v6
       with:
         aws-region: ${{ env.AWS_REGION }}
-        role-to-assume: arn:aws:iam::${{ env.AWS_ACCOUNT_ID }}:role/github-actions-ecs-role
+        role-to-assume: arn:aws:iam::${{ env.AWS_ACCOUNT_ID }}:role/${{ env.AWS_GITHUB_ECS_ROLE_NAME }}
         role-session-name: GitHubActionsECSDeployment
 
     - name: Login to Amazon ECR
