@@ -28,7 +28,7 @@ COPY --from=builder /app/dist ./dist
 # Instalamos solo dependencias de producción para ahorrar espacio
 RUN npm install --only=production
 
-EXPOSE 3001
+EXPOSE 3002
 
 # Comando para arrancar la app
 CMD ["node", "dist/main"]
