@@ -1,11 +1,6 @@
 name: Build and Deploy to ECS
 
 on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
-
   workflow_dispatch:
     inputs:
       id_entorno:
